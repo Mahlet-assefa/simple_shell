@@ -96,7 +96,7 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 {
 	char **env_var, **new_environment;
-	size_t size;
+	size_t s;
 	int i, i2;
 
 	if (!args[0])
