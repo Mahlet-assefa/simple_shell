@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 	signal(SIGINT, sig_handler);
 
 	*exe_ret = 0;
-	environ = _copy_env();
+	environ = _copy_environ();
 	assert(environ);
 	if (!environ)
 		exit(-100);
