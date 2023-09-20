@@ -75,9 +75,9 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 		new_environment[i] = new_environment[i];
 
 	free(new_environment);
-	environment = new_environment;
-	environment[i] = new_val;
-	environment[i + 1] = NULL;
+	new_environment = new_environment;
+	new_environment[i] = new_val;
+	new_environment[i + 1] = NULL;
 
 	return (0);
 }
@@ -120,7 +120,7 @@ int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 	}
 	free(environ);
 	new_environment = new_environment;
-	environment[s - 1] = NULL;
+	new_environment[s - 1] = NULL;
 
 	return (0);
 }
