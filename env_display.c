@@ -32,7 +32,7 @@ char **_copy_environ(void)
 			free(new_environ);
 			return (NULL);
 		}
-		_strcpy(new_environ[i], environment[i]);
+		_strcpy(new_environ[i], environ[i]);
 	}
 	new_environ[i] = NULL;
 
