@@ -17,8 +17,8 @@ int (*get_builtin(char *command))(char **args, char **front)
 	builtins_t funcs[] = {
 		{ "exit", shellie_exit },
 		{ "env", shell_env },
-		{ "setenv", shellie_setenv },
-		{ "unsetenv", shellie_unsetenv },
+		{ "setenv", shell_setenv },
+		{ "unsetenv", shell_unsetenv },
 		{ "cd", shellie_cd },
 		{ "alias", shellie_alias },
 		{ "help", shellie_help },
@@ -103,8 +103,8 @@ int shellie_cd(char **args, char __attribute__((__unused__)) **front)
 			if ((args[0][1] == '-' && args[0][2] == '\0') ||
 					args[0][1] == '\0')
 			{
-				if (_get_env("OLDPWD") != NULL)
-					(chdir(*_get_env("OLDPWD") + 7));
+				if (_getenv("OLDPWD") != NULL)
+					(chdir(*_getenv("OLDPWD") + 7));
 			}
 			else
 			{
@@ -126,8 +126,8 @@ int shellie_cd(char **args, char __attribute__((__unused__)) **front)
 	}
 	else
 	{
-		if (_get_env("HOME") != NULL)
-			chdir(*(_get_env("HOME")) + 5);
+		if (_getenv("HOME") != NULL)
+			chdir(*(_getenv("HOME")) + 5);
 	}
 
 	pwd = getcwd(pwd, 0);
@@ -140,7 +140,7 @@ int shellie_cd(char **args, char __attribute__((__unused__)) **front)
 
 	dir_info[0] = "OLDPWD";
 	dir_info[1] = oldpwd;
-	if (shellie_setenv(dir_info, dir_info) == -1)
+	if (shell_setenv(dir_info, dir_info) == -1)
 		return (-1);
 
 	dir_info[0] = "PWD";
