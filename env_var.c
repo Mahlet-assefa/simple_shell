@@ -8,11 +8,8 @@ int shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
  * shell_env - Prints the current environment.
  * @front: A double pointer to the beginning of args.
  * @args: An array of args passed to the shell.
- *
  * Return: If an error occurs - -1, Otherwise - 0.
- *
- * Description: Prints one variable per line in the
- *           
+ * Description: Prints one variable per line
  */
 int shell_env(char **args, char __attribute__((__unused__)) **front)
 {
@@ -22,7 +19,7 @@ int shell_env(char **args, char __attribute__((__unused__)) **front)
 	if (!environ)
 		return (-1);
 
-	for (i = 0; environment[i]; i++)
+	for (i = 0; environ[i]; i++)
 	{
 		write(STDOUT_FILENO, environment[i], _strlen(environment[i]));
 		write(STDOUT_FILENO, &c, 1);
@@ -36,7 +33,8 @@ int shell_env(char **args, char __attribute__((__unused__)) **front)
  * shell_setenv - Changes an environment variable to the PATH.
  * @front: A double pointer to the beginning of arguments.
  * @args: An array of args passed to the shell.
- * Description: args[1] is the name of the new or existing PATH var, args[2] is the val to set the new or changed variable to.
+ * Description: args[1] is the name of the new or existing PATH var,
+ *		args[2] is the val to set the new or changed variable to.
  *
  * Return: If an error occurs - -1, Otherwise - 0.
  */
@@ -63,10 +61,10 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 		*env_var = new_val;
 		return (0);
 	}
-	for (size = 0; environment[size]; size++)
+	for (size = 0; new_environment[size]; size++)
 		;
 
-	free_environ = malloc(sizeof(char *) * (s + 2));
+	free_environ = malloc(sizeof(char *) * (size + 2));
 	if (!new_environment)
 	{
 		free(new_val);
@@ -88,9 +86,7 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
  * shell_unsetenv - Deletes an environmental variable from the PATH.
  * @front: A double pointer to the beginning of args.
  * @args: An arr of args passed to the shell.
- * 
  * Description: args[1] is the PATH variable to remove.
- *
  * Return: If an error occurs - -1, Otherwise - 0.
  */
 int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
@@ -112,7 +108,7 @@ int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 	if (!new_environment)
 		return (create_error(args, -1));
 
-	for (i = 0, i2 = 0; environment[i]; i++)
+	for (i = 0, i2 = 0; new_environment[i]; i++)
 	{
 		if (*env_var == environment[i])
 		{
