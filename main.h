@@ -79,18 +79,12 @@ int call_args(char **args, char **front, int *exe_ret);
 int run_args(char **args, char **front, int *exe_ret);
 int handle_args(int *exe_ret);
 int check_args(char **args);
-void free_args(char **args, char **front);
 char **replace_alias(char **args);
 
 /* String functions */
-int _strlen(const char *s);
-char *_strcat(char *dest, const char *src);
 char *_strncat(char *dest, const char *src, size_t n);
-char *_strcpy(char *dest, const char *src);
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
-int _strcmp(char *s1, char *s2);
-int _strncmp(const char *s1, const char *s2, size_t n);
 
 /* Builtins */
 int (*get_builtin(char *command))(char **args, char **front);
@@ -99,16 +93,13 @@ int shell_env(char **args, char __attribute__((__unused__)) **front);
 int shell_setenv(char **args, char __attribute__((__unused__)) **front);
 int shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
 int shellie_cd(char **args, char __attribute__((__unused__)) **front);
-int shellie_alias(char **args, char __attribute__((__unused__)) **front);
 int shellie_help(char **args, char __attribute__((__unused__)) **front);
 
 /* Builtin Helpers */
 char **_copy_environ(void);
 void free_environ(void);
-char **_getenv(const char *var);
 
-/* Error Handling */
-int create_error(char **args, int err);
+/* Error Handling*/
 char *error_env(char **args);
 char *error_1(char **args);
 char *error_2_exit(char **args);
@@ -119,18 +110,7 @@ char *error_127(char **args);
 
 /* Linkedlist Helpers */
 aliases_t *add_alias_end(aliases_t **head, char *name, char *value);
-void free_alias_list(aliases_t *head);
-lists_t *add_node_end(lists_t **head, char *dir);
-void free_list(lists_t *head);
 
-void help_all(void);
-void help_alias(void);
-void help_cd(void);
-void help_exit(void);
-void help_help(void);
-void help_env(void);
-void help_setenv(void);
-void help_unsetenv(void);
 void help_history(void);
 void free_env(void);
 int proc_file_commands(char *file_path, int *exe_ret);
