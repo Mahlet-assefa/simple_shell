@@ -16,7 +16,7 @@ char *get_location(char *command)
 	lists_t *dirs, *head;
 	struct stat st;
 
-	path = _get_env("PATH");
+	path = _getenv("PATH");
 	if (!path || !(*path))
 		return (NULL);
 
@@ -60,7 +60,7 @@ char *fill_path_dir(char *path)
 	int i, l = 0;
 	char *path_copy, *pwd;
 
-	pwd = *(_get_env("PWD")) + 4;
+	pwd = *(_getenv("PWD")) + 4;
 	for (i = 0; path[i]; i++)
 	{
 		if (path[i] == ':')
@@ -115,7 +115,7 @@ lists_t *get_path_dir(char *path)
 	char **d, *path_copy;
 	lists_t *head = NULL;
 
-	path_copy = fill_path_d(path);
+	path_copy = fill_path_dir(path);
 	if (!path_copy)
 		return (NULL);
 	d = _strtok(path_copy, ":");
@@ -125,7 +125,7 @@ lists_t *get_path_dir(char *path)
 
 	for (ind = 0; d[ind]; ind++)
 	{
-		if (add_node_end(&head, d[index]) == NULL)
+		if (add_node_end(&head, d[ind]) == NULL)
 		{
 			free_list(head);
 			free(d);
