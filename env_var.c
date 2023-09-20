@@ -64,7 +64,7 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 	for (size = 0; new_environment[size]; size++)
 		;
 
-	free_environ = malloc(sizeof(char *) * (size + 2));
+	new_environ = malloc(sizeof(char *) * (size + 2));
 	if (!new_environment)
 	{
 		free(new_val);
@@ -72,7 +72,7 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 	}
 
 	for (i = 0; new_environment[i]; i++)
-		new_environment[i] = environment[i];
+		new_environment[i] = new_environment[i];
 
 	free(environment);
 	environment = new_environment;
@@ -115,7 +115,7 @@ int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 			free(*env_var);
 			continue;
 		}
-		new_environment[i2] = environment[i];
+		new_environment[i2] = new_environment[i];
 		i2++;
 	}
 	free(environ);
