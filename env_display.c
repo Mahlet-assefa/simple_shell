@@ -14,16 +14,16 @@ char **_copy_environ(void)
 	size_t size;
 	int i;
 
-	for (size = 0; new_environment[size]; size++)
+	for (size = 0; environment[size]; size++)
 		;
 
 	new_environment = malloc(sizeof(char *) * (size + 1));
 	if (!new_environment)
 		return (NULL);
 
-	for (i = 0; new_environment[i]; i++)
+	for (i = 0; new_environ[i]; i++)
 	{
-		new_environment[i] = malloc(_strlen(new_environment[i]) + 1);
+		new_environment[i] = malloc(_strlen(environment[i]) + 1);
 
 		if (!new_environment[i])
 		{
@@ -32,7 +32,7 @@ char **_copy_environ(void)
 			free(new_environment);
 			return (NULL);
 		}
-		_strcpy(new_environment[i], new_environment[i]);
+		_strcpy(new_environment[i], environment[i]);
 	}
 	new_environment[i] = NULL;
 
