@@ -11,13 +11,13 @@ char **_getenv(const char *var);
 char **_copy_environ(void)
 {
 	char **new_environment;
-	size_t s;
+	size_t size;
 	int i;
 
-	for (s = 0; new_environment[i]; s++)
+	for (size = 0; new_environment[size]; size++)
 		;
 
-	new_environment = malloc(sizeof(char *) * (s + 1));
+	new_environment = malloc(sizeof(char *) * (size + 1));
 	if (!new_environment)
 		return (NULL);
 
