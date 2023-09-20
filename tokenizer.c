@@ -22,7 +22,7 @@ int lentoken(char *str, char *delim)
 		index++;
 	}
 
-	return (len);
+	return (l);
 }
 
 /**
