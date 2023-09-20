@@ -95,6 +95,11 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 /* Builtins */
 int (*get_builtin(char *command))(char **args, char **front);
 int shellie_exit(char **args, char **front);
+int _myenv(info_t *info);
+char *_getenv(info_t *info, const char *name);
+int _mysetenv(info_t *info);
+int _myunsetenv(info_t *info);
+int populate_env_list(info_t *info);
 int shell_env(char **args, char __attribute__((__unused__)) **front);
 int shell_setenv(char **args, char __attribute__((__unused__)) **front);
 int shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
