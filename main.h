@@ -14,15 +14,6 @@
 #define END_OF_FILE -2
 #define EXIT -3
 
-/* Global Environemnt */
-extern char **environment;
-
-/* Global Program Name */
-char *name;
-
-/* Global History Counter */
-int hist;
-
 /**
  * struct lists_s - A new struct type defining a linked list.
  * @dir: A directory path.
