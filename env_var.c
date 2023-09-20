@@ -21,7 +21,7 @@ int shell_env(char **args, char __attribute__((__unused__)) **front)
 
 	for (i = 0; environ[i]; i++)
 	{
-		write(STDOUT_FILENO, environment[i], _strlen(environment[i]));
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, &c, 1);
 	}
 
@@ -71,7 +71,7 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 		return (create_error(args, -1));
 	}
 
-	for (i = 0; environment[i]; i++)
+	for (i = 0; new_environment[i]; i++)
 		new_environment[i] = environment[i];
 
 	free(environment);
@@ -110,7 +110,7 @@ int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 
 	for (i = 0, i2 = 0; new_environment[i]; i++)
 	{
-		if (*env_var == environment[i])
+		if (*env_var == new_environment[i])
 		{
 			free(*env_var);
 			continue;
