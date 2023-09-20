@@ -145,7 +145,7 @@ int shellie_cd(char **args, char __attribute__((__unused__)) **front)
 
 	dir_info[0] = "PWD";
 	dir_info[1] = pwd;
-	if (shellie_setenv(dir_info, dir_info) == -1)
+	if (shell_setenv(dir_info, dir_info) == -1)
 		return (-1);
 	if (args[0] && args[0][0] == '-' && args[0][1] != '-')
 	{
