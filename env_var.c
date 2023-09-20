@@ -40,7 +40,7 @@ int shell_env(char **args, char __attribute__((__unused__)) **front)
  */
 int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 {
-	char **env_var = NULL, **new_environment, *new_val;
+	char **env_var = NULL, **new_environ, *new_val;
 	size_t size;
 	int i;
 
@@ -61,23 +61,23 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 		*env_var = new_val;
 		return (0);
 	}
-	for (size = 0; new_environment[size]; size++)
+	for (size = 0; environ[size]; size++)
 		;
 
-	new_environment = malloc(sizeof(char *) * (size + 2));
-	if (!new_environment)
+	new_environ = malloc(sizeof(char *) * (size + 2));
+	if (!new_environ)
 	{
 		free(new_val);
 		return (create_error(args, -1));
 	}
 
-	for (i = 0; new_environment[i]; i++)
-		new_environment[i] = new_environment[i];
+	for (i = 0; environ[i]; i++)
+		new_environ[i] = environ[i];
 
-	free(new_environment);
-	new_environment = new_environment;
-	new_environment[i] = new_val;
-	new_environment[i + 1] = NULL;
+	free(environ);
+	environ = new_environ;
+	environ[i] = new_val;
+	environ[i + 1] = NULL;
 
 	return (0);
 }
@@ -91,8 +91,8 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
  */
 int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 {
-	char **env_var, **new_environment;
-	size_t s;
+	char **env_var, **new_environ;
+	size_t size;
 	int i, i2;
 
 	if (!args[0])
@@ -101,26 +101,26 @@ int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 	if (!env_var)
 		return (0);
 
-	for (s = 0; new_environment[s]; s++)
+	for (size = 0; environ[size]; size++)
 		;
 
-	new_environment = malloc(sizeof(char *) * s);
-	if (!new_environment)
+	new_environ = malloc(sizeof(char *) * size);
+	if (!new_environ)
 		return (create_error(args, -1));
 
-	for (i = 0, i2 = 0; new_environment[i]; i++)
+	for (i = 0, i2 = 0; environ[i]; i++)
 	{
-		if (*env_var == new_environment[i])
+		if (*env_var == environ[i])
 		{
 			free(*env_var);
 			continue;
 		}
-		new_environment[i2] = new_environment[i];
+		new_environ[i2] = environ[i];
 		i2++;
 	}
 	free(environ);
-	new_environment = new_environment;
-	new_environment[s - 1] = NULL;
+	environ = new_environ;
+	environ[size - 1] = NULL;
 
 	return (0);
 }
