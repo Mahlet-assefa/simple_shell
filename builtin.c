@@ -16,7 +16,7 @@ int (*get_builtin(char *command))(char **args, char **front)
 {
 	builtins_t funcs[] = {
 		{ "exit", shellie_exit },
-		{ "env", shellie_env },
+		{ "env", shell_env },
 		{ "setenv", shellie_setenv },
 		{ "unsetenv", shellie_unsetenv },
 		{ "cd", shellie_cd },
