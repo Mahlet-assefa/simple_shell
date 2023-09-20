@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
 
 	*exe_ret = 0;
 	environ = _copy_env();
+	assert(environ);
 	if (!environ)
 		exit(-100);
 
